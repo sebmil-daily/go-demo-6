@@ -3,7 +3,7 @@ GO := GO15VENDOREXPERIMENT=1 go
 NAME := go-demo-6
 OS := $(shell uname)
 MAIN_GO := main.go
-ROOT_PACKAGE := $(GIT_PROVIDER)/vfarcic/$(NAME)
+ROOT_PACKAGE := $(GIT_PROVIDER)/sebmil-daily/$(NAME)
 GO_VERSION := $(shell $(GO) version | sed -e 's/^[^0-9.]*\([0-9.]*\).*/\1/')
 PACKAGE_DIRS := $(shell $(GO) list ./... | grep -v /vendor/)
 PKGS := $(shell go list ./... | grep -v /vendor | grep -v generated)
@@ -60,5 +60,3 @@ lint: vendor | $(PKGS) $(GOLINT) # ❷
 	    test -z "$$($(GOLINT) $$pkg | tee /dev/stderr)" || ret=1 ; \
 	done ; exit $$ret
 
-unittest: 
-	CGO_ENABLED=$(CGO_ENABLED) $(GO) test --run UnitTest -v
